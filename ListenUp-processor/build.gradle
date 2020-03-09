@@ -1,0 +1,23 @@
+apply plugin: 'java-library'
+
+
+
+dependencies {
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation project(":ListenUp")
+}
+
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'ListenUp-processor',  
+        	'Implementation-Version': '1.0'
+    }
+    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from zipTree('libs/linewriterv1.jar')
+    with jar
+    //exclude "**/Excluded.java"
+}
+
+build.finalizedBy(fatJar)

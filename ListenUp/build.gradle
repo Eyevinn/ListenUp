@@ -1,0 +1,15 @@
+apply plugin: 'java-library'
+
+
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'ListenUp',  
+        	'Implementation-Version': '1.0'
+    }
+    //baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    //exclude "**/Excluded.java"
+}
