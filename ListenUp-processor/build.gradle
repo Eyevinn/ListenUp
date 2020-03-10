@@ -16,6 +16,7 @@ task fatJar(type: Jar) {
     }
     //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     from zipTree('libs/linewriterv1.jar')
+    from new File(project(':ListenUp').buildDir, "classes/java/main")
     with jar
     //exclude "**/Excluded.java"
 }
