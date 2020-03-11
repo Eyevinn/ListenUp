@@ -9,7 +9,7 @@ task fatJar(type: Jar) {
         	'Implementation-Version': '1.0'
     }
     //baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
     //exclude "**/Excluded.java"
 }

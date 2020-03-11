@@ -1,9 +1,11 @@
 apply plugin: 'java-library'
 
-
+repositories {
+	maven { url "https://jitpack.io" }
+}
 
 dependencies {
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation 'com.github.MattiasSelinEyevinn:LineWriter:1.0'
 	implementation project(":ListenUp")
 }
 
@@ -14,9 +16,7 @@ task fatJar(type: Jar) {
         attributes 'Implementation-Title': 'ListenUp-processor',  
         	'Implementation-Version': '1.0'
     }
-    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    from zipTree('libs/linewriterv1.jar')
-    from new File(project(':ListenUp').buildDir, "classes/java/main")
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
     //exclude "**/Excluded.java"
 }
