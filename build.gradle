@@ -20,4 +20,7 @@ allprojects {
         google()
         jcenter()
     }
+    
+	apply plugin: 'maven'
+	group = 'com.github.Eyevinn'
 }
